@@ -1,29 +1,31 @@
-pipeline{
-    agent any {
-        stages
-        {
-            stage('Checkout')
-            {
-                steps{
-git url:'https://github.com/snehachopra1611/Project_S2.git'
-branch : 'main'
-                }
-            }
-                 stage('Test')
-            {
-                steps{
-sh 'test -f index.html'
-echo 'File Found'
-                }
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/snehachopra1611/html_project2.git',
+                    branch: 'main'
             }
         }
-            post {
-                success{
-                    echo 'Pipeline Executed Successfully'
-                }
-                failure{
-                    echo 'Pipeline Failed'
-                }
+
+        stage('Test') {
+            steps {
+                sh 'test -f index.html'
+                echo 'Application file index.html found'
             }
+        }
+
+    }
+
+    post {
+        success {
+            echo 'Pipeline Completed Successfully'
+        }
+
+        failure {
+            echo 'Pipeline Failed'
         }
     }
+}
